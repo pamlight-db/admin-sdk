@@ -1,0 +1,51 @@
+{
+    "name": "@pamlight/admin",
+    "version": "0.0.1",
+    "description": "The library for syncing data changes to multiple devices from your database",
+    "main": "index.js",
+    "typings": "dist/index",
+    "scripts": {
+        "test": "mocha --require ts-node/register test/**/*.ts",
+        "publish": "npm publish --access=public",
+        "build": "tsc"
+    },
+    "keywords": [
+        "real-time",
+        "database",
+        "javascript",
+        "data-sync",
+        "mongodb",
+        "pamlight"
+    ],
+    "author": {
+        "name": "Moses Godson",
+        "email": "mosesgodson27@gmail.com"
+    },
+    "license": "ISC",
+    "bugs": {
+        "url": "https://gitlab.com/Tumba/pamlight/issues"
+    },
+    "repository": {
+        "type": "git",
+        "url": "git+https://gitlab.com/Tumba/pamlight"
+    },
+    "homepage": "https://gitlab.com/Tumba/pamlight/readme.md",
+    "dependencies": {
+        "lodash": "^4.17.15",
+        "socket.io-client": "^2.2.0"
+    },
+    "devDependencies": {
+        "@types/chai": "^4.1.7",
+        "@types/lodash": "^4.14.123",
+        "@types/mocha": "^5.2.6",
+        "@types/request-promise": "^4.1.44",
+        "@types/socket.io-client": "^1.4.32",
+        "chai": "^4.2.0",
+        "fs-extra": "^7.0.1",
+        "minimist": "^1.2.0",
+        "mocha": "^6.1.3",
+        "ts-node": "^8.0.3",
+        "tslint": "^5.20.0",
+        "typescript": "^3.4.3"
+    }
+}
