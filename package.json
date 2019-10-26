@@ -1,12 +1,11 @@
 {
     "name": "@pamlight/admin",
-    "version": "0.0.1",
+    "version": "0.0.5",
     "description": "The library for syncing data changes to multiple devices from your database",
     "main": "index.js",
-    "typings": "dist/index",
+    "typings": "index",
     "scripts": {
         "test": "mocha --require ts-node/register test/**/*.ts",
-        "publish": "npm publish --access=public",
         "build": "tsc"
     },
     "keywords": [
@@ -23,13 +22,13 @@
     },
     "license": "ISC",
     "bugs": {
-        "url": "https://gitlab.com/Tumba/pamlight/issues"
+        "url": "https://github.com/pamlight-db/admin-sdk/issues"
     },
     "repository": {
         "type": "git",
-        "url": "git+https://gitlab.com/Tumba/pamlight"
+        "url": "https://github.com/pamlight-db/admin-sdk"
     },
-    "homepage": "https://gitlab.com/Tumba/pamlight/readme.md",
+    "homepage": "https://pamlight.com",
     "dependencies": {
         "lodash": "^4.17.15",
         "socket.io-client": "^2.2.0"
@@ -38,7 +37,6 @@
         "@types/chai": "^4.1.7",
         "@types/lodash": "^4.14.123",
         "@types/mocha": "^5.2.6",
-        "@types/request-promise": "^4.1.44",
         "@types/socket.io-client": "^1.4.32",
         "chai": "^4.2.0",
         "fs-extra": "^7.0.1",

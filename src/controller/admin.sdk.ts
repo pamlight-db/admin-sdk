@@ -3,12 +3,25 @@ import { keys, values } from 'lodash';
 import { getDefaultPrimaryIndex, isIndexRequired } from '../services';
 import { ServerSocketIOClient } from './socket';
 
+interface ReadRouteConfigModel {
+    route: (config: ReadConfigRouteOption) => void;
+    routes: (configs: ReadConfigRouteOption[]) => void;
+}
+
+interface WriteRouteConfigModel {
+    route: (config: WriteConfigRouteOption) => void;
+    routes: (configs: WriteConfigRouteOption[]) => void;
+}
+
 export class PamlightAdmin {
+    public reads: ReadRouteConfigModel;
+    public writes: WriteRouteConfigModel;
+
     private appStarted: boolean;
     private _readRoutesMap: IObjectMap<ReadConfigRouteOption>;
     private _writeRoutesMap: IObjectMap<WriteConfigRouteOption>;
     private _settings: IObjectMap<any>;
-    private client: ServerSocketIOClient; 
+    private client: ServerSocketIOClient;
 
     constructor(credentials: PamlightAdminCredentials) {
         this._readRoutesMap = {};
@@ -16,6 +29,11 @@ export class PamlightAdmin {
         this.client = new ServerSocketIOClient(credentials);
 
         this._settings = {};
+        this.setupRoutesModel();
+    }
+
+    public enableDevMode(): void {
+        this.client.enableDevMode();
     }
 
     public configure(key: string, val: any): void {
@@ -80,33 +98,35 @@ export class PamlightAdmin {
         if (!config.docFn) {
             config.docFn = (queryData: any, updateData: any): Promise<WriteDocOption> => {
                 return Promise.resolve({ query: queryData, payload: updateData });
-            }
+            };
         }
 
         this._writeRoutesMap[config.routeId] = config;
     }
 
-    public reads = {
-        route: (config: ReadConfigRouteOption): void => {
-            this.configureReadRoute(config);
-        },
-        routes: (configs: ReadConfigRouteOption[]): void => {
-            for (const config of configs) {
+    private setupRoutesModel(): void {
+        this.reads = {
+            route: (config: ReadConfigRouteOption): void => {
                 this.configureReadRoute(config);
+            },
+            routes: (configs: ReadConfigRouteOption[]): void => {
+                for (const config of configs) {
+                    this.configureReadRoute(config);
+                }
             }
-        }
-    };
+        };
 
-    public writes = {
-        route: (config: WriteConfigRouteOption): void => {
-            this.configureWriteRoute(config);
-        },
-        routes: (configs: WriteConfigRouteOption[]): void => {
-            for (const config of configs) {
+        this.writes = {
+            route: (config: WriteConfigRouteOption): void => {
                 this.configureWriteRoute(config);
+            },
+            routes: (configs: WriteConfigRouteOption[]): void => {
+                for (const config of configs) {
+                    this.configureWriteRoute(config);
+                }
             }
-        }
-    };
+        };
+    }
 
     private checkWriteRoutes(): string {
         const routes = values(this._writeRoutesMap);

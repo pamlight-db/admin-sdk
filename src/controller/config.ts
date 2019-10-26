@@ -1,10 +1,6 @@
 const config = {
-    production: false,
-    sdkDomain: 'http://localhost:8002'
+    production: true,
+    sdkDomain: 'https://pamlight.herokuapp.com'
 };
-
-if (config.production) {
-    config.sdkDomain = 'production url here';
-}
 
 export const sdkConfig = config;

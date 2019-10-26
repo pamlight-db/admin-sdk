@@ -24,10 +24,16 @@ export class ServerSocketIOClient {
     private socket: SocketIOClient.Socket;
     private credentials: PamlightAdminCredentials;
     private _routes: { reads: ReadConfigRouteOption[], writes: WriteConfigRouteOption[]; };
+    private production: boolean;
 
     constructor(cred: PamlightAdminCredentials) {
         this.connectionStatus = ConnectionStatusTypes.IDLE;
         this.credentials = cred;
+        this.production = true;
+    }
+
+    public enableDevMode(): void {
+        this.production = false;
     }
 
     public request(payload: PamlightApiCommand): Promise<any> {
@@ -147,7 +153,7 @@ export class ServerSocketIOClient {
                         }
                     };
 
-                    this.socket = connect(sdkConfig.sdkDomain, opts);
+                    this.socket = connect(this.production ? sdkConfig.sdkDomain : 'http://localhost:8002', opts);
 
                     this.handleSocketConnection(resolve);
                 });

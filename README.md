@@ -53,3 +53,6 @@ Install pamlight admin sdk via npm by running the following command:
 }).catch(err => {  
 &nbsp;&nbsp;&nbsp;&nbsp;throw Error(err);  
 });
+
+### Further Reading
+For further reading and information, check more [anvanced read operations](https://pamlight.com) as well as [advanced write operations](https://pamlight.com)
