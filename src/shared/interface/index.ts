@@ -1,4 +1,4 @@
-import { PamlightAdminActionTypes, PamlightDBWriteTypes } from '../enums';
+import { PamlightAdminActionTypes, PamlightDBWriteTypes, RouteTypes } from '../enums';
 
 export interface IObjectMap<T> {
     [key: string]: T;
@@ -49,6 +49,7 @@ export interface WriteConfigRouteOption {
     routeId: string;
     collection?: string;
     writeType?: PamlightDBWriteTypes;
+    type?: RouteTypes;
 
     /* If called by a trigger, prev is the result of the previous route that triggered it */
     docFn: (clientData: any, parentData?: WriteDocOption) => Promise<WriteDocOption>;
@@ -59,6 +60,7 @@ export interface WriteConfigRouteOption {
 export interface ReadConfigRouteOption {
     routeId: string;
     collection: string;
+    type?: RouteTypes;
     queryFn?: (payload: any) => IObjectMap<any>;
     limit?: number;
     sort?: IObjectMap<1 | -1>;

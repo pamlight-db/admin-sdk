@@ -1,4 +1,4 @@
-import { ReadConfigRouteOption, PamlightAdminCredentials, IObjectMap, WriteConfigRouteOption, WriteDocOption } from '../shared';
+import { ReadConfigRouteOption, PamlightAdminCredentials, IObjectMap, WriteConfigRouteOption, WriteDocOption, RouteTypes } from '../shared';
 import { keys, values } from 'lodash';
 import { getDefaultPrimaryIndex, isIndexRequired } from '../services';
 import { ServerSocketIOClient } from './socket';
@@ -102,6 +102,20 @@ export class PamlightAdmin {
         }
 
         this._writeRoutesMap[config.routeId] = config;
+    }
+
+    public route(route: ReadConfigRouteOption | WriteConfigRouteOption): void {
+        if (route.type === RouteTypes.READ) {
+            this.reads.route(route as ReadConfigRouteOption);
+        } else if (route.type === RouteTypes.WRITE) {
+            this.writes.route(route as WriteConfigRouteOption);
+        } else {
+            throw Error(`Invalid route type ${JSON.stringify(route)}`);
+        }
+    }
+
+    public routes(...rs: ReadConfigRouteOption[] | WriteConfigRouteOption[]): void {
+        rs.forEach((r: ReadConfigRouteOption | WriteConfigRouteOption) => this.route(r));
     }
 
     private setupRoutesModel(): void {

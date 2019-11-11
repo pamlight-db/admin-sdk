@@ -9,6 +9,11 @@
  * `tsc && node task -c copyAssets && cd dist && npm publish --access=public`
  * */
 
+ /**
+  * To unpublish a version, use the following command format. x.x.x is version number:
+  * `npm unpublish @pamlight/admin@x.x.x`
+  */
+
 const argv = require('minimist')(process.argv.slice(2));
 const fs = require('fs-extra');
 

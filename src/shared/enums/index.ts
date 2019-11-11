@@ -11,3 +11,8 @@ export enum PamlightDBWriteTypes {
     DELETE_DOCUMENT,
     DELETE_DOCUMENTS
 }
+
+export enum RouteTypes {
+    READ = 1,
+    WRITE
+}
