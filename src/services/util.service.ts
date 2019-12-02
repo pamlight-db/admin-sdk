@@ -14,27 +14,6 @@ export const getDefaultPrimaryIndex = (adapterId?: string): IObjectMap<1 | -1> =
     }
 }
 
-export const getPropertyValue = (value: any): any => {
-    switch (typeof value) {
-        case 'string': {
-            return 'test';
-        }
-
-        case 'number': {
-            return 12345;
-        }
-
-        case 'boolean': {
-            return true;
-        }
-
-        // defaults to string
-        default: {
-            return 'test';
-        }
-    }
-}
-
 export const isIndexRequired = (options: ReadConfigRouteOption): boolean => {
     return !!options.sort;
 }
@@ -47,7 +26,7 @@ export const getRandomString = (size: number = 5): string => {
     for (let i = 0; i < size; i++) {
         result.push(
             possibleCharacters.charAt(Math.floor(Math.random() * charSize))
-        );
+        ); 
     }
 
     return result.join('');

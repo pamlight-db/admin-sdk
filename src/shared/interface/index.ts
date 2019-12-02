@@ -68,3 +68,8 @@ export interface ReadConfigRouteOption {
     projection?: IObjectMap<boolean>;
     isSingleDocument?: boolean; // determines whether the result is array or single document. defaults to false
 }
+
+export interface RouteConfig {
+    reads: ReadConfigRouteOption[];
+    writes: WriteConfigRouteOption[];
+}
